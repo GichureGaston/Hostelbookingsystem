@@ -75,7 +75,7 @@ public void insertHostels(String name,int noOfRooms,int noOfBeds, int id){
 }
 //update hostel details
 public void updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
-        String query="UPDATE hostels SET name =name +? SET noOfRooms=noOfRooms +? SET noOfBeds=noOfBeds +?WHERE id+?";
+        String query="UPDATE hostels SET name =name +? SET noOfRooms=noOfRooms +? SET noOfBeds=noOfBeds +? WHERE id+?";
         try {
             PreparedStatement statement=connection.prepareStatement(query);
             statement.setString(1,name);
