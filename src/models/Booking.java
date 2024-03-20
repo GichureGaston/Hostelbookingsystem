@@ -1,13 +1,14 @@
 package models;
 
+
  public class Booking {
-     protected int id;
-     protected String createdAt;
-     protected String bookedFrom;
-     protected String bookedUntil;
-     protected  int studentId;
-     protected  int roomId;
-     protected int bedNo;
+     private int id;
+     private String createdAt;
+     private String bookedFrom;
+     private String bookedUntil;
+     private  int studentId;
+     private  int roomId;
+     private int bedNo;
      public Booking(int id,int bedNo, String createdAt,String bookedFrom, String bookedUntil,int studentId, int roomId){
          this.id=id;
        this.createdAt=createdAt;

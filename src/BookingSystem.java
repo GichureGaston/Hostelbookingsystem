@@ -6,11 +6,11 @@ import models.Students;
 
 import java.util.ArrayList;
 
-class BookingSystem {
-    private ArrayList<Booking> bookings;
-    private  ArrayList<Rooms> rooms;
-    private ArrayList<Hostels> hostels;
-    private ArrayList<Students> students;
+public class BookingSystem {
+    protected ArrayList<Booking> bookings;
+    protected  ArrayList<Rooms> rooms;
+    protected ArrayList<Hostels> hostels;
+    protected ArrayList<Students> students;
 
 
     public  BookingSystem(){
@@ -23,11 +23,19 @@ class BookingSystem {
         hostels.add(new Hostels("SD",45,65,2));
         //add rooms
         rooms.add(new Rooms("SJ1",true,2,1,1,2300));
-        rooms.add(new Rooms("SJ2",true,2,1,2,2300));
+        rooms.add(new Rooms("SD2",true,2,1,2,2300));
         // add students
-        students.add(new Students("Gino",1,"GINO23"));
-        students.add(new Students("Fred",1,"Fred23"));
-        students.add(new Students("Gordon",1,"Gordon23"));
+        students.add(new Students("Gaston Gichure",1,"GG"));
+        students.add(new Students("Carlos Odhiambo",2,"CO"));
+        students.add(new Students("Grace Muthoki",3,"GM"));
+        students.add(new Students("Hassan Julo",4,"HJ"));
+        students.add(new Students("Kelvin Ribai",5,"KR"));
+        students.add(new Students("lennox Jira",6,"JL"));
+        students.add(new Students("Jesse Uhuru",7,"JU"));
+
+
+
+
     }
 
     public  void displayAvailableRooms(String hostel){
