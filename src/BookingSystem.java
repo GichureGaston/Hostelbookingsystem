@@ -13,6 +13,8 @@ public class BookingSystem {
     protected ArrayList<Students> students;
 
 
+
+
     public  BookingSystem(){
         bookings =new ArrayList<>();
         rooms = new ArrayList<>();
@@ -53,8 +55,9 @@ public class BookingSystem {
         }
     }
 
-    public void createStudent(Students students){
+    public void insertStudents(@org.jetbrains.annotations.NotNull Students students){
         StudentsDTO  studentsDTO =new StudentsDTO();
-        studentsDTO.insertStudents(students.getId(), students.getName(), students.getRegistrationNumber());
+       boolean inserted = studentsDTO.insertStudents(students.getId(), students.getName(), students.getRegistrationNumber());
+
     }
 }

@@ -35,7 +35,7 @@ public class HostelDTO {
         }
     }
 
-public void createHostelTable(){
+public boolean createHostelTable(){
     try {
         String createHostelTableQuery="CREATE TABLE IF NOT EXISTS hostels("+
                 "name TEXT NOT NULL,"+
@@ -46,13 +46,18 @@ public void createHostelTable(){
         createHostelsTableStatement.execute(createHostelTableQuery);
         createHostelsTableStatement.close();
         System.out.println("Created Hostels Table Successfully");
+        return true;
+
     }catch (SQLException e){
         System.out.println("Failed to create Hostel Table:("+e.getMessage());
+
     }
 
+
+    return false;
 }
 //Inserting Hostels
-public void insertHostels(String name,int noOfRooms,int noOfBeds, int id){
+public boolean insertHostels(String name,int noOfRooms,int noOfBeds, int id){
     String query="INSERT INTO hostels (name ,noOfRooms ,noOfBeds, id)VALUES(?,?,?,?)";
     try {
         PreparedStatement statement=connection.prepareStatement(query);
@@ -64,17 +69,20 @@ public void insertHostels(String name,int noOfRooms,int noOfBeds, int id){
         int rowsInserted = statement.executeUpdate();
         if (rowsInserted>0){
             System.out.println("Hostel Details Inserted Successfully.");
+            return true;
         }else {
             System.out.println("Failed to insert Hostel Details.");
+            return false;
         }
     }
     catch (SQLException e){
         System.out.println("Failed to insert Hostel Details."+e.getMessage());
+        return false;
         }
 
 }
 //update hostel details
-public void updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
+public boolean updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
         String query="UPDATE hostels SET name =name +? SET noOfRooms=noOfRooms +? SET noOfBeds=noOfBeds +? WHERE id+?";
         try {
             PreparedStatement statement=connection.prepareStatement(query);
@@ -85,16 +93,19 @@ public void updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
             int rowsInserted= statement.executeUpdate();
             if(rowsInserted>0){
                 System.out.println("Hostel Details Updated  successfully");
+                return true;
             }else {
                 System.out.println("Failed to Update Hostel Details .");
+                return false;
             }
 
         }catch (SQLException e){
             System.out.println("Failed to Update Hostel Details:"+e.getMessage());
         }
-    }
+    return false;
+}
     //delete hostel data
-    public void deleteRecord(String name){
+    public boolean deleteRecord(String name){
         String query ="DELETE FROM hostels WHERE name =?";
         try {
             PreparedStatement statement=connection.prepareStatement(query);
@@ -103,16 +114,19 @@ public void updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
             int rowsDeleted= statement.executeUpdate();
             if(rowsDeleted>0){
                 System.out.println("Hostel Name Deleted  successfully");
+                return true;
             }else {
                 System.out.println("Failed to Delete Hostel Name .");
+                return false;
             }
 
         }catch (SQLException e){
             System.out.println("Failed to Delete Hostel Name:"+e.getMessage());
         }
-        }
+        return false;
+    }
         //Request all Hostel details
-    public void requestAllHostelDetails(DefaultTableModel hostels){
+    public boolean requestAllHostelDetails(DefaultTableModel hostels){
         String query ="SELECT * FROM hostels";
              hostels.setRowCount(0);
         try {
@@ -129,8 +143,10 @@ public void updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
             resultSet.close();
             statement.close();
         } catch (SQLException e) {
-            System.out.println("Failed to Retrieve Hostel Details)"+ e.getMessage());
+            System.out.println("Failed to Retrieve Hostel Details)" + e.getMessage());
+
         }
+        return false;
     }
     }
 

@@ -37,7 +37,7 @@ public class BookingDTO {
             System.out.println("Failed to close the database connection: " + e.getMessage());
         }
     }
-    public void createBookings(){
+    public void createBookingsTable(){
         try{System.out.println("Starting Booking Schema creation.");
             String createBookingsTableQuery ="CREATE TABLE IF NOT EXISTS Bookings("+
                     "id INTEGER PRIMARY KEY AUTOINCREMENT ,"+
@@ -58,11 +58,12 @@ public class BookingDTO {
 
     } catch (SQLException e) {
             System.out.println("Failed to create BookingSchema:"+e.getMessage());
+
         }
     }
     // Method to insert data into table
 
-    public void insertBookingDetails(int id ,String createdAt,String bookedFrom,String bookedUntil, int studentId,int roomId,int bedNo){
+    public boolean insertBookingDetails(int id ,String createdAt,String bookedFrom,String bookedUntil, int studentId,int roomId,int bedNo){
         String query="INSERT INTO Bookings(id,createdAt,bookedFrom,bookedUntil,studentId,roomId,bedNo)VALUES(?,?,?,?,?,?,?)";
         try {
             PreparedStatement statement =connection.prepareStatement(query);
@@ -77,17 +78,20 @@ public class BookingDTO {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted>0){
                 System.out.println("Booking Details Inserted Successfully.");
+                return true;
             }else {
                 System.out.println("Failed to insert Booking Details.");
+                return false;
             }
         }
         catch (SQLException e) {
             System.out.println("Failed to insert Booking Details." + e.getMessage());
+            return false;
 
         }
         }
         //updating bookingDetails into table
-        public void updateBookings(int id,String createdAt,String bookedFrom,String bookedUntil,int studentId,int roomId,int bedNo){
+        public boolean updateBookings(int id,String createdAt,String bookedFrom,String bookedUntil,int studentId,int roomId,int bedNo){
             String query="UPDATE Bookings SET id = id +?  SET createdAt=createdAt +? SET bookedFrom=bookedFrom +? SET bookedUntil=bookedUntil +? SET studentId=studentId +? WHERE roomId=+?";
             try {
                 PreparedStatement statement =connection.prepareStatement(query);
@@ -101,32 +105,38 @@ public class BookingDTO {
                 int rowsInserted= statement.executeUpdate();
                 if(rowsInserted>0){
                     System.out.println("Booking made successfully");
+                    return true;
                 }else {
                     System.out.println("Failed to make booking.");
+                    return false;
                 }
 
             }
             catch (SQLException e){
                 System.out.println("Failed to make booking:"+e.getMessage());
+                return false;
             }
 
         }
         //Remove  booking
-    public void removeBooking(int id){
-        String query="DELETE FROM Bookings =?";
+    public boolean removeBooking(int studentId){
+        String query="DELETE FROM Bookings WHERE studentId=?";
         try{
             PreparedStatement statement= connection.prepareStatement(query);
-            statement.setInt(1,id);
+            statement.setInt(5, studentId);
 
             int rowsDeleted= statement.executeUpdate();
             if(rowsDeleted>0){
                 System.out.println("Booking Removed Successfully");
+                return true;
             }else {
                 System.out.println("Failed to Remove Booking.");
+                return false;
             }
 
         }catch (SQLException e){
             System.out.println("Failed to Remove Booking:"+e.getMessage());
+            return false;
         }
         }
     }

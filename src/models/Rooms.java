@@ -7,11 +7,14 @@ public class Rooms {
      private int id;
      private double price;
      private boolean available;
+
+
 public Rooms(String name,boolean available, int noOfBeds,int hostelId, int id, int price){
     this.name=name;
     this.noOfBeds=noOfBeds;
     this.hostelId=hostelId;
-    this.id=id;this.available=available;
+    this.id=id;
+    this.available=available;
     this.price=price;
 }
      public String getName() {

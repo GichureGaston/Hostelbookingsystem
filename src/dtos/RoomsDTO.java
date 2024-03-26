@@ -1,5 +1,7 @@
 package dtos;
 
+import org.jetbrains.annotations.NotNull;
+
 import javax.swing.table.DefaultTableModel;
 import java.sql.*;
 
@@ -34,7 +36,7 @@ public class RoomsDTO {
         }
     }
     //Creation of the Rooms Table
-    public void createRoomsTable(){
+    public boolean createRoomsTable(){
         try {
             String createRoomsTableQuery = "CREATE IF NOT EXISTS rooms(" +
                     "name TEXT NOT NULL" +
@@ -48,12 +50,14 @@ public class RoomsDTO {
             createRoomsTableStatement.close();
 
             System.out.println("Rooms Table created Successfully");
+            return true;
         } catch (SQLException e) {
             System.out.println("Failed to create Rooms Table:"+e.getMessage());
         }
+        return false;
     }
     // Inserting Data Into the Room Table
-    public void insertRoomDetails(String name,int noOfBeds,int hostelId,int id, double price,boolean available){
+    public boolean insertRoomDetails(String name,int noOfBeds,int hostelId,int id, double price,boolean available){
         String query="INSERT INTO rooms(name,noOfBeds,hostelId,id,price,available)VALUES(?,?,?,?,?,?)";
         try {
             PreparedStatement statement= connection.prepareStatement(query);
@@ -66,16 +70,21 @@ public class RoomsDTO {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted>0){
                 System.out.println("Room Details Inserted Successfully.");
+                return available;
             }else {
                 System.out.println("Failed to insert Room Details.");
+                return false;
             }
         }catch (SQLException e){
         System.out.println("Failed to insert Room Details:"+e.getMessage());
 
         }
+        return false;
+
+
     }
     //updating Data in RoomTable
-    public void updateRoomsTable(String name,int noOfBeds,int hostelId,int id, double price,boolean available){
+    public boolean updateRoomsTable(String name,int noOfBeds,int hostelId,int id, double price,boolean available){
         String query="UPDATE rooms SET name=name +? SET noOfBeds=noOfBeds +? SET  hostelId=hostelId +? SET id=id +? SET price=price +? WHERE available=available";
         try {
             PreparedStatement statement= connection.prepareStatement(query);
@@ -88,17 +97,20 @@ public class RoomsDTO {
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted>0){
                 System.out.println("Room Details Updated Successfully.");
+                return true;
             }else {
                 System.out.println("Failed to Update Room Details.");
+                return false;
             }
         }catch (SQLException e){
             System.out.println("Failed to Update Room Details:"+e.getMessage());
+            return false;
 
         }
     }
     //removing Data from room table
-    public void removeRoomRecord(String name){
-        String query="DELETE FROM roomsWHERE name=?";
+    public boolean removeRoomRecord(String name){
+        String query="DELETE FROM rooms WHERE name=?";
         try {
             PreparedStatement statement= connection.prepareStatement(query);
             statement.setString(1,name);
@@ -106,15 +118,18 @@ public class RoomsDTO {
             int rowDeleted = statement.executeUpdate();
             if (rowDeleted>0){
                 System.out.println("Room Details Updated Successfully.");
+                return true;
             }else {
                 System.out.println("Failed to Update Room Details.");
+                return false;
             }
         }catch (SQLException e){
             System.out.println("Failed to Update Room Details:"+e.getMessage());
+            return false;
 
         }
     }
-    public void requestAllRoomInformation(DefaultTableModel rooms){
+    public boolean requestAllRoomInformation(@NotNull DefaultTableModel rooms){
         String query="SELECT * FROM rooms";
         rooms.setRowCount(0);
         try {
@@ -130,6 +145,9 @@ public class RoomsDTO {
             }
     }catch (SQLException e){
             System.out.println("Failed to Retrieve Room Data"+e.getMessage());
+            return false;
         }
 
-}}
+return true;
+    }
+}

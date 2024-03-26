@@ -10,6 +10,11 @@ public class  Students {
         this.id=id;
        this. registrationNumber=registrationNumber;
     }
+
+
+    public Students(String studentRegistrationD) {
+    }
+
     public String getName(){
         return name;
     }

@@ -11,6 +11,10 @@ package models;
          this.noOfRooms=noOfRooms;
          this.id=id;
      }
+
+     public Hostels(String name) {
+     }
+
      public String getName() {
          return name;
      }

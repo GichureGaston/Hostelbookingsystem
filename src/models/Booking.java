@@ -9,8 +9,7 @@ package models;
      private  int studentId;
      private  int roomId;
      private int bedNo;
-     public Booking(int id,int bedNo, String createdAt,String bookedFrom, String bookedUntil,int studentId, int roomId){
-         this.id=id;
+     public Booking(int id,int bedNo, String createdAt,String bookedFrom, String bookedUntil,int studentId, int roomId){this.id=id;
        this.createdAt=createdAt;
        this.bookedFrom=bookedFrom;
        this.bedNo=bedNo;
@@ -18,6 +17,9 @@ package models;
        this.studentId=studentId;
        this.roomId=roomId;
 
+     }
+
+     public Booking(int id) {
      }
 
      public int getRoomId() {
