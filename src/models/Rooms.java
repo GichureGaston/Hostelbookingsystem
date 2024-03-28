@@ -17,7 +17,14 @@ public Rooms(String name,boolean available, int noOfBeds,int hostelId, int id, i
     this.available=available;
     this.price=price;
 }
-     public String getName() {
+
+    public Rooms() {
+    }
+
+    public Rooms(String nameI) {
+    }
+
+    public String getName() {
          return name;
      }
 

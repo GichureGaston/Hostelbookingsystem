@@ -2,7 +2,6 @@ package classRepositories;
 
 import dtos.HostelDTO;
 import models.Hostels;
-import models.Rooms;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.table.DefaultTableModel;
@@ -23,9 +22,9 @@ public class HostelRepository {
         boolean update= hostelDTO.updateHostels(hostels.getName(),hostels.getNoOfRooms(),hostels.getNoOfBeds(),hostels.getId());
 
     }
-    public void deleteRecord(String hostels){
+    public void deleteRecord(@NotNull String hostels){
 
-        boolean remove= hostelDTO.deleteRecord(hostels.getName());
+        boolean remove= hostelDTO.deleteRecord(hostels);
     }
     public void requestAllHostelDetails( Hostels hostels){
         boolean request= hostelDTO.requestAllHostelDetails(new DefaultTableModel());

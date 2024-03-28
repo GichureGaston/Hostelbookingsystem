@@ -108,6 +108,11 @@ public boolean updateHostels(String name, int noOfRooms,int noOfBeds,int id ){
     public boolean deleteRecord(String name){
         String query ="DELETE FROM hostels WHERE name =?";
         try {
+
+            //A SQL statement is precompiled and stored in a PreparedStatement object. This object can then be used to efficiently execute this statement multiple times.
+            //Note: The setter methods (setShort, setString, and so on) for setting IN parameter values must specify types that are compatible with the defined SQL type of the input parameter. For instance, if the IN parameter has SQL type INTEGER, then the method setInt should be used.
+            //If arbitrary parameter type conversions are required, the method setObject should be used with a target SQL type.
+            //In the following example of setting a parameter, con represents an active connection:
             PreparedStatement statement=connection.prepareStatement(query);
             statement.setString(1,name);
 

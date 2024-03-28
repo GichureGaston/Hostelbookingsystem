@@ -1,17 +1,12 @@
+import classRepositories.BookingRepository;
 import classRepositories.HostelRepository;
 import classRepositories.RoomsRepository;
 import classRepositories.StudentsRepository;
 import models.Booking;
 import models.Hostels;
-import models.Students;
 import models.Rooms;
-import classRepositories.BookingRepository;
+import models.Students;
 
-
-import javax.swing.table.DefaultTableModel;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -23,9 +18,9 @@ public class Main {
         HostelRepository hostelRepository = new HostelRepository();
         RoomsRepository roomsRepository = new RoomsRepository();
 
-        System.out.println("Welcome to hostel booking");
+        System.out.println("|Welcome To HostelBooking Menu|");
 
-        System.out.println(" Connecting to database");
+
         while (true) {
             System.out.println("100. Insert Student Details");
             System.out.println("101. Update Students' Details");
@@ -41,6 +36,12 @@ public class Main {
             System.out.println("301. Update Hostel Records");
             System.out.println("302. Remove Hostel Record");
             System.out.println("303. Request For Hostel Records");
+
+            System.out.println("400. Insert Room Details");
+            System.out.println("401. Update Room Details");
+            System.out.println("402. Delete Room Record");
+            System.out.println("403. Request for Room Details");
+
 
 
             int choice = scanner.nextInt();
@@ -186,7 +187,55 @@ public class Main {
 
                     hostelRepository.requestAllHostelDetails(new Hostels(nameR),noOfRoomsR,noOfBedsR,idRequest);
                     break;
+
+                    //Functions For Rooms Menu
+
                 case 400:
+                    System.out.println("Enter Room Name:");
+                    String nameInsert= scanner.nextLine();
+                    System.out.println("Enter Number Of Beds:");
+                    String noOfBedsInsert= scanner.nextLine();
+                    System.out.println("Enter HostelID:");
+                    String hostelIDInsert= scanner.nextLine();
+                    System.out.println("Enter ID:");
+                    String IDInsert= scanner.nextLine();
+                    System.out.println("Enter Room Price:");
+                    String roomPriceInsert= scanner.nextLine();
+                    System.out.println("Check Availability:");
+                    String availabilityInsert= scanner.nextLine();
+
+
+                    roomsRepository.insertRoomsDetails(new Rooms(nameInsert),Integer.parseInt(noOfBedsInsert),Integer.parseInt(hostelIDInsert),Integer.parseInt(IDInsert),Double.valueOf(roomPriceInsert),Boolean.getBoolean(availabilityInsert));
+                    break;
+                case 401:
+                    System.out.println("Enter Room Name:");
+                    String nameUpdate= scanner.nextLine();
+                    System.out.println("Enter Number Of Beds:");
+                    String noOfBedsUpdate= scanner.nextLine();
+                    System.out.println("Enter HostelID:");
+                    String hostelIDUpdate= scanner.nextLine();
+                    System.out.println("Enter ID:");
+                    String IDUpdate = scanner.nextLine();
+                    System.out.println("Enter Room Price:");
+                    String roomPriceUpdate = scanner.nextLine();
+                    System.out.println("Check Availability:");
+                    String availabilityUpdate = scanner.nextLine();
+
+
+                    roomsRepository.updateRoomsTable(new Rooms(nameUpdate),Integer.parseInt(hostelIDUpdate));
+                    break;
+                case 402:
+                    System.out.println("Enter Room Name:");
+                    String nameRemove= scanner.nextLine();
+
+                    roomsRepository.removeRoomRecord(new Rooms(nameRemove));
+
+                    break;
+                case 403:
+                    System.out.println("Enter Room Name:");
+                    String requestAll= scanner.nextLine();
+
+                    roomsRepository.requestAllStudentDetails(new Rooms());
                     break;
 
                 default:

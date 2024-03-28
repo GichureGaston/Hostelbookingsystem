@@ -12,12 +12,12 @@ public class RoomsRepository {
     public  RoomsRepository(){
         roomsDTO = new RoomsDTO();
     }
-    public void insertRoomsDetails(@NotNull Rooms rooms){
+    public void insertRoomsDetails(@NotNull Rooms rooms, int i, int parseInt, int anInt, Double aDouble, boolean aBoolean){
 
         boolean inserted = roomsDTO.insertRoomDetails(rooms.getName(),rooms.getHostelId(),rooms.getId(), rooms.getNoOfBeds(), rooms.getPrice(), rooms.isAvailable());
 
     }
-    public void updateRoomsTable(Rooms rooms){
+    public void updateRoomsTable(Rooms rooms, int i){
 
         boolean update= roomsDTO.updateRoomsTable(rooms.getName(), rooms.getHostelId(), rooms.getId(),rooms.getNoOfBeds(),rooms.getPrice(), rooms.isAvailable());
     }
