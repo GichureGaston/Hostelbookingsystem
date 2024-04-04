@@ -15,7 +15,7 @@ public class BookingSystem {
 
 
 
-    public  BookingSystem(){
+    public BookingSystem(){
         bookings =new ArrayList<>();
         rooms = new ArrayList<>();
         hostels = new ArrayList<>();

@@ -12,7 +12,7 @@ public class StudentsDTO {
             System.out.println("Welcome \n Connecting to database");
             String url = "jdbc:mariadb://localhost:3306/bookings";
             String user = "root";
-            String password = "";
+            String password = "atomtech19";
             connection = DriverManager.getConnection(url, user, password);
             if (connection != null) {
                 System.out.println("Connected to the database!");
@@ -36,7 +36,7 @@ public class StudentsDTO {
     }
 
     //Create schema for students
-    public boolean createStudentsSchema() {
+    public void createStudentsSchema() {
         try {
             System.out.println("Starting students Schema creation.");
             String createStudentTableQuery = "CREATE TABLE IF NOT EXISTS students(" +
@@ -48,13 +48,11 @@ public class StudentsDTO {
             createStudentsTableStatement.close();
             System.out.println("Schema created successfully.");
 
-            return true;
 
         } catch (SQLException e) {
             System.out.println("Failed to create schema:" + e.getMessage());
 
         }
-        return false;
     }
 
     //Inserting students data in schema

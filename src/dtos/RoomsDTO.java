@@ -13,7 +13,7 @@ public class RoomsDTO {
             System.out.println("Welcome \n Connecting to database");
             String url = "jdbc:mariadb://localhost:3306/bookings";
             String user = "root";
-            String password = "";
+            String password = "atomtech19";
             connection = DriverManager.getConnection(url, user, password);
             if (connection != null) {
                 System.out.println("Connected to the database!");

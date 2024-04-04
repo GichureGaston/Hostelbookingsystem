@@ -5,6 +5,7 @@ import models.Students;
 import org.jetbrains.annotations.NotNull;
 
 import javax.swing.table.DefaultTableModel;
+import java.util.List;
 
 public class StudentsRepository {
 private final StudentsDTO studentsDTO;
@@ -28,10 +29,15 @@ private final StudentsDTO studentsDTO;
         boolean removeStudentDetails= studentsDTO.removeStudentDetails(registrationNumber);
 
     }
-    public void requestAllStudentDetails(@org.jetbrains.annotations.NotNull Students students){
+    public List<Students> requestAllStudentDetails(@NotNull Students students){
 
         boolean requestAllStudentDetails= studentsDTO.requestAllStudentDetails( new DefaultTableModel());
 
+
+        return null;
+    }
+
+    public void createStudentsSchema() {
 
     }
 }

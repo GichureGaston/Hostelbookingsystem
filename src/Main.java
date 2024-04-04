@@ -6,26 +6,32 @@ import models.Booking;
 import models.Hostels;
 import models.Rooms;
 import models.Students;
+import org.jetbrains.annotations.NotNull;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
+
+
         Scanner scanner = new Scanner(System.in);
-        BookingSystem bookingSystem = new BookingSystem();
         StudentsRepository studentsRepository = new StudentsRepository();
         BookingRepository bookingRepository = new BookingRepository();
         HostelRepository hostelRepository = new HostelRepository();
         RoomsRepository roomsRepository = new RoomsRepository();
-
         System.out.println("|Welcome To HostelBooking Menu|");
 
 
         while (true) {
+            // Create all schemas
+            System.out.println("001. Create All Schemas");
+
             System.out.println("100. Insert Student Details");
             System.out.println("101. Update Students' Details");
             System.out.println("102. Remove Students, Details");
             System.out.println("103. Request For StudentDetails");
+            System.out.println("104. Get all StudentDetails");
 
 
             System.out.println("201. Insert Booking Details");
@@ -47,6 +53,10 @@ public class Main {
             int choice = scanner.nextInt();
             scanner.nextLine();
             switch (choice) {
+                // schemas
+                case 001:
+                    studentsRepository.createStudentsSchema();
+                    break;
                 //inserting studentData
 
                 case 100:
@@ -84,17 +94,18 @@ public class Main {
 
                 //get report of students
                 case 104:
-                    System.out.println("Enter New Student id:");
-                    String studentIdR = scanner.nextLine();
-                    System.out.println("Enter New Student full name:");
-                    String studentFullNameR = scanner.nextLine();
-                    System.out.println("Enter New Student Registration Number:");
-                    String studentRegistrationR = scanner.nextLine();
+                    System.out.println("Getting students details:");
 
-                    studentsRepository.requestAllStudentDetails(new Students(studentFullNameR, Integer.parseInt(studentIdR), studentRegistrationR));
+                    @NotNull Students DefaultTableModel = null;
+                    List<Students> studentList =studentsRepository.requestAllStudentDetails(DefaultTableModel);
 
+                    for (Students student : studentList) {
+                        System.out.println("Name: " + student.getName() + ", ID: " + student.getId() +
+                                ", Registration Number: " + student.getRegistrationNumber());
+                    }
+                    break;
 
-                    // Creating New Booking
+                // Creating New Booking
 
                 case 201:
                     System.out.println("Enter ID");
@@ -114,7 +125,7 @@ public class Main {
 
                     bookingRepository.insertBookingDetails(new Booking(Integer.parseInt(idI),Integer.parseInt(BedNoI), createAtI, BookedFromI, BookedUntilI, Integer.parseInt(StudentIdI), Integer.parseInt(RoomIDI)));
                     break;
-                        // Updating Booking Details
+                // Updating Booking Details
                 case 202:
 
                     System.out.println("Enter ID");
@@ -143,7 +154,7 @@ public class Main {
                     bookingRepository.removeBookingDetails(new Booking(Integer.parseInt(StudentIdR)));
                     break;
 
-                    //Hostel thingies
+                //Hostel thingies
                 case 300:
                     System.out.println("Enter Hostel Name");
                     String name=scanner.nextLine();
@@ -188,7 +199,7 @@ public class Main {
                     hostelRepository.requestAllHostelDetails(new Hostels(nameR),noOfRoomsR,noOfBedsR,idRequest);
                     break;
 
-                    //Functions For Rooms Menu
+                //Functions For Rooms Menu
 
                 case 400:
                     System.out.println("Enter Room Name:");
@@ -235,12 +246,13 @@ public class Main {
                     System.out.println("Enter Room Name:");
                     String requestAll= scanner.nextLine();
 
-                    roomsRepository.requestAllStudentDetails(new Rooms());
+                    //  roomsRepository.requestAllRoomInformation(new Rooms() );
                     break;
 
                 default:
                     System.out.println("Invalid option. Please try again.");
             }
+
         }
 
 //        String url = "jdbc:mariadb://localhost:3306/bookings";
